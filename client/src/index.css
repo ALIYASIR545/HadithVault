@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(215 28% 22%);
+  --foreground: hsl(210 40% 98%);
+  --card: hsl(217 19% 32%);
+  --card-foreground: hsl(210 40% 98%);
+  --popover: hsl(217 19% 32%);
+  --popover-foreground: hsl(210 40% 98%);
+  --primary: hsl(177 70% 41%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(217 19% 38%);
+  --secondary-foreground: hsl(210 40% 98%);
+  --muted: hsl(217 19% 38%);
+  --muted-foreground: hsl(215 20% 75%);
+  --accent: hsl(217 19% 38%);
+  --accent-foreground: hsl(177 70% 41%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(217 19% 40%);
+  --input: hsl(217 19% 38%);
+  --ring: hsl(177 70% 41%);
+  --chart-1: hsl(177 70% 41%);
+  --chart-2: hsl(160 60% 45%);
+  --chart-3: hsl(30 80% 55%);
+  --chart-4: hsl(280 65% 60%);
+  --chart-5: hsl(340 75% 55%);
+  --sidebar: hsl(217 19% 32%);
+  --sidebar-foreground: hsl(210 40% 98%);
+  --sidebar-primary: hsl(177 70% 41%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(217 19% 38%);
+  --sidebar-accent-foreground: hsl(177 70% 41%);
+  --sidebar-border: hsl(217 19% 40%);
+  --sidebar-ring: hsl(177 70% 41%);
+  --font-sans: Inter, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --font-arabic: 'Noto Naskh Arabic', serif;
+  --radius: 0.75rem;
+  --islamic-teal: hsl(177 70% 41%);
+  --islamic-gold: hsl(43 96% 56%);
+  --shadow-2xs: 0px 1px 2px 0px hsl(177 70% 41% / 0.05);
+  --shadow-xs: 0px 1px 2px 0px hsl(177 70% 41% / 0.05);
+  --shadow-sm: 0px 1px 2px 0px hsl(177 70% 41% / 0.05), 0px 1px 3px -1px hsl(177 70% 41% / 0.1);
+  --shadow: 0px 1px 2px 0px hsl(177 70% 41% / 0.05), 0px 1px 3px -1px hsl(177 70% 41% / 0.1);
+  --shadow-md: 0px 2px 4px -1px hsl(177 70% 41% / 0.1), 0px 4px 6px -1px hsl(177 70% 41% / 0.05);
+  --shadow-lg: 0px 4px 6px -2px hsl(177 70% 41% / 0.05), 0px 10px 15px -3px hsl(177 70% 41% / 0.1);
+  --shadow-xl: 0px 10px 25px -3px hsl(177 70% 41% / 0.1), 0px 20px 25px -5px hsl(177 70% 41% / 0.04);
+  --shadow-2xl: 0px 25px 50px -12px hsl(177 70% 41% / 0.25);
+}
+
+.dark {
+  --background: hsl(215 28% 18%);
+  --foreground: hsl(210 40% 98%);
+  --card: hsl(217 19% 28%);
+  --card-foreground: hsl(210 40% 98%);
+  --popover: hsl(217 19% 28%);
+  --popover-foreground: hsl(210 40% 98%);
+  --primary: hsl(177 70% 41%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(217 19% 34%);
+  --secondary-foreground: hsl(210 40% 98%);
+  --muted: hsl(217 19% 34%);
+  --muted-foreground: hsl(215 20% 75%);
+  --accent: hsl(217 19% 34%);
+  --accent-foreground: hsl(177 70% 41%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(217 19% 36%);
+  --input: hsl(217 19% 34%);
+  --ring: hsl(177 70% 41%);
+  --chart-1: hsl(177 70% 41%);
+  --chart-2: hsl(160 60% 45%);
+  --chart-3: hsl(30 80% 55%);
+  --chart-4: hsl(280 65% 60%);
+  --chart-5: hsl(340 75% 55%);
+  --sidebar: hsl(217 19% 28%);
+  --sidebar-foreground: hsl(210 40% 98%);
+  --sidebar-primary: hsl(177 70% 41%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(217 19% 34%);
+  --sidebar-accent-foreground: hsl(177 70% 41%);
+  --sidebar-border: hsl(217 19% 36%);
+  --sidebar-ring: hsl(177 70% 41%);
+  --islamic-teal: hsl(177 70% 41%);
+  --islamic-gold: hsl(43 96% 56%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  .font-arabic {
+    font-family: 'Noto Naskh Arabic', 'Arabic Typesetting', 'Traditional Arabic', serif;
+    font-weight: 400;
+    line-height: 1.8;
+    direction: rtl;
+  }
+  
+  .font-urdu {
+    font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', serif;
+    font-weight: 400;
+    line-height: 1.8;
+    direction: rtl;
+  }
+}
+
+@layer utilities {
+  .islamic-gradient {
+    background: linear-gradient(135deg, hsl(177 60% 27%), hsl(160 55% 30%));
+  }
+
+  .text-islamic-teal {
+    color: var(--islamic-teal);
+  }
+
+  .text-islamic-gold {
+    color: var(--islamic-gold);
+  }
+
+  .bg-islamic-teal {
+    background-color: var(--islamic-teal);
+  }
+
+  .bg-islamic-gold {
+    background-color: var(--islamic-gold);
+  }
+
+  .border-islamic-teal {
+    border-color: var(--islamic-teal);
+  }
+
+  .hover\:bg-islamic-teal:hover {
+    background-color: var(--islamic-teal);
+  }
+
+  .hover\:text-islamic-teal:hover {
+    color: var(--islamic-teal);
+  }
+
+  .hover\:text-islamic-gold:hover {
+    color: var(--islamic-gold);
+  }
+
+  .focus\:ring-islamic-teal:focus {
+    --tw-ring-color: var(--islamic-teal);
+  }
+}
+
+/* Font Size Adjustments */
+html[data-font-size="small"] {
+  font-size: 14px;
+}
+
+html[data-font-size="medium"] {
+  font-size: 16px;
+}
+
+html[data-font-size="large"] {
+  font-size: 18px;
+}
+
+html[data-font-size="extra-large"] {
+  font-size: 20px;
+}
+
+/* Responsive adjustments for hadith text */
+html[data-font-size="small"] .font-arabic {
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+html[data-font-size="medium"] .font-arabic {
+  font-size: 1.25rem;
+  line-height: 1.8;
+}
+
+html[data-font-size="large"] .font-arabic {
+  font-size: 1.5rem;
+  line-height: 1.9;
+}
+
+html[data-font-size="extra-large"] .font-arabic {
+  font-size: 1.75rem;
+  line-height: 2;
+}

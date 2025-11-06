@@ -1,0 +1,26 @@
+{
+  "name": "Hadith 360",
+  "short_name": "Hadith360",
+  "description": "Comprehensive Islamic Hadith collections with multilingual support",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0d9488",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "reference", "lifestyle"],
+  "lang": "en"
+}

@@ -1,0 +1,26 @@
+{
+  "bukhari": [
+    {
+      "id": 1,
+      "arabicText": "إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ",
+      "englishTranslation": "Actions are judged by intentions.",
+      "hadithNumber": "1"
+    }
+  ],
+  "muslim": [
+    {
+      "id": 2,
+      "arabicText": "الدين النصيحة",
+      "englishTranslation": "Religion is sincere advice.",
+      "hadithNumber": "2"
+    }
+  ],
+  "tirmidhi": [
+    {
+      "id": 3,
+      "arabicText": "من حسن إسلام المرء تركه ما لا يعنيه",
+      "englishTranslation": "Part of someone’s good practice of Islam is leaving what does not concern them.",
+      "hadithNumber": "3"
+    }
+  ]
+}

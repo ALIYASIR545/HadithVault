@@ -1,0 +1,30 @@
+[
+  {
+    "id": "bukhari",
+    "name": "Sahih al-Bukhari",
+    "description": "The most authentic collection of Hadith compiled by Imam al-Bukhari, containing over 7,000 verified narrations.",
+    "compiler": "Imam al-Bukhari",
+    "totalHadiths": 7563
+  },
+  {
+    "id": "muslim",
+    "name": "Sahih Muslim",
+    "description": "The second most authentic collection, compiled by Imam Muslim with strict criteria for authenticity.",
+    "compiler": "Imam Muslim",
+    "totalHadiths": 7190
+  },
+  {
+    "id": "abudawud",
+    "name": "Sunan Abu Dawood",
+    "description": "A comprehensive collection focusing on legal matters and practical guidance for daily life.",
+    "compiler": "Imam Abu Dawood",
+    "totalHadiths": 5274
+  },
+  {
+    "id": "tirmidhi",
+    "name": "Jami` at-Tirmidhi",
+    "description": "A collection known for its detailed commentary and grading of Hadith authenticity.",
+    "compiler": "Imam at-Tirmidhi",
+    "totalHadiths": 3956
+  }
+]
