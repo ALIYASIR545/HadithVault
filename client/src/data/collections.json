@@ -26,5 +26,19 @@
     "description": "A collection known for its detailed commentary and grading of Hadith authenticity.",
     "compiler": "Imam at-Tirmidhi",
     "totalHadiths": 3956
+  },
+  {
+    "id": "ibnmajah",
+    "name": "Sunan Ibn Majah",
+    "description": "One of the six canonical hadith collections in Sunni Islam, focusing on jurisprudence and daily practices.",
+    "compiler": "Imam Ibn Majah",
+    "totalHadiths": 4341
+  },
+  {
+    "id": "nasai",
+    "name": "Sunan an-Nasa'i",
+    "description": "A renowned collection known for its strict criteria in hadith authentication and comprehensive coverage of Islamic law.",
+    "compiler": "Imam an-Nasa'i",
+    "totalHadiths": 5761
   }
 ]

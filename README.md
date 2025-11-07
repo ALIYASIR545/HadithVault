@@ -2,15 +2,17 @@
 
 **Every Hadith. Every Language. Every Reference.**
 
-A comprehensive web application for accessing authenticated Hadith literature with accurate translations and references. Search through major Islamic collections including Sahih al-Bukhari, Sahih Muslim, Sunan Abu Dawood, and Jami' at-Tirmidhi.
+A comprehensive web application for accessing authenticated Hadith literature with accurate translations and references. Search through major Islamic collections including Sahih al-Bukhari, Sahih Muslim, Sunan Abu Dawood, Jami' at-Tirmidhi, Sunan Ibn Majah, and Sunan an-Nasa'i.
 
 ## Features
 
-- **Comprehensive Collections**: Access to 24,000+ hadiths from 4 major collections
-  - Sahih al-Bukhari (7,277 hadiths)
-  - Sahih Muslim (7,459 hadiths)
-  - Jami' at-Tirmidhi (4,053 hadiths)
-  - Sunan Abu Dawood (5,276 hadiths)
+- **Comprehensive Collections**: Access to 34,000+ hadiths from 6 major collections
+  - Sahih al-Bukhari (7,563 hadiths)
+  - Sahih Muslim (7,190 hadiths)
+  - Sunan Abu Dawood (5,274 hadiths)
+  - Jami' at-Tirmidhi (3,956 hadiths)
+  - Sunan Ibn Majah (4,341 hadiths)
+  - Sunan an-Nasa'i (5,761 hadiths)
 
 - **Advanced Search**: Powerful search functionality with filters by collection, book, chapter, and authenticity
 - **Multiple Languages**: Support for Arabic, English, and Urdu translations

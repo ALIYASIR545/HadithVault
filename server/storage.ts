@@ -105,6 +105,22 @@ export class MemStorage implements IStorage {
         description: "A collection known for its detailed commentary and grading of Hadith authenticity.",
         totalHadiths: 3956
       },
+      {
+        id: "ibnmajah",
+        name: "Sunan Ibn Majah",
+        arabicName: "سنن ابن ماجه",
+        compiler: "Imam Ibn Majah",
+        description: "One of the six canonical hadith collections in Sunni Islam, focusing on jurisprudence and daily practices.",
+        totalHadiths: 4341
+      },
+      {
+        id: "nasai",
+        name: "Sunan an-Nasa'i",
+        arabicName: "سنن النسائي",
+        compiler: "Imam an-Nasa'i",
+        description: "A renowned collection known for its strict criteria in hadith authentication and comprehensive coverage of Islamic law.",
+        totalHadiths: 5761
+      },
     ];
 
     collections.forEach(collection => {
@@ -116,6 +132,8 @@ export class MemStorage implements IStorage {
     this.loadHadithsFromFile("muslim");
     this.loadHadithsFromFile("tirmidhi");
     this.loadHadithsFromFile("abudawud");
+    this.loadHadithsFromFile("ibnmajah");
+    this.loadHadithsFromFile("nasai");
 
     console.log(`Loaded ${this.hadiths.size} hadiths from ${this.hadithCollections.size} collections`);
   }
