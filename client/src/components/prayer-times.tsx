@@ -49,14 +49,11 @@ export default function PrayerTimes() {
               if (geoResponse.ok) {
                 const geoData = await geoResponse.json();
 
-                // Extract city name from address - try multiple fields
+                // Extract CITY name only - skip neighborhoods/suburbs, avoid province names
                 const cityName = geoData.address?.city ||
                                  geoData.address?.town ||
-                                 geoData.address?.village ||
-                                 geoData.address?.municipality ||
                                  geoData.address?.county ||
                                  geoData.address?.state_district ||
-                                 geoData.address?.state ||
                                  'Your Location';
 
                 setLocation(cityName);
