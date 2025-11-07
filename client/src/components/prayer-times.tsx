@@ -36,6 +36,21 @@ export default function PrayerTimes() {
             const { latitude, longitude } = position.coords;
 
             try {
+              // First, get city name using reverse geocoding
+              const geoResponse = await fetch(
+                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+              );
+              const geoData = await geoResponse.json();
+
+              // Extract city name from address
+              const cityName = geoData.address?.city ||
+                               geoData.address?.town ||
+                               geoData.address?.village ||
+                               geoData.address?.county ||
+                               'Your Location';
+
+              setLocation(cityName);
+
               // Fetch prayer times from Aladhan API
               const today = new Date();
               const timestamp = Math.floor(today.getTime() / 1000);
@@ -48,7 +63,6 @@ export default function PrayerTimes() {
 
               if (data.code === 200 && data.data) {
                 const timings = data.data.timings as PrayerTimesData;
-                const locationData = data.data.meta;
 
                 setPrayerTimes([
                   { name: "Fajr", time: timings.Fajr },
@@ -57,10 +71,6 @@ export default function PrayerTimes() {
                   { name: "Maghrib", time: timings.Maghrib },
                   { name: "Isha", time: timings.Isha },
                 ]);
-
-                // Use timezone to get city name, fallback to "Your Location"
-                const cityName = locationData.timezone ? locationData.timezone.split('/').pop() : 'Your Location';
-                setLocation(cityName);
               }
             } catch (err) {
               setError("Failed to fetch prayer times");
