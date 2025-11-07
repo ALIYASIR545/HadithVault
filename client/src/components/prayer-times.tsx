@@ -58,7 +58,9 @@ export default function PrayerTimes() {
                   { name: "Isha", time: timings.Isha },
                 ]);
 
-                setLocation(`${locationData.timezone}`);
+                // Use timezone to get city name, fallback to "Your Location"
+                const cityName = locationData.timezone ? locationData.timezone.split('/').pop() : 'Your Location';
+                setLocation(cityName);
               }
             } catch (err) {
               setError("Failed to fetch prayer times");
@@ -144,7 +146,7 @@ export default function PrayerTimes() {
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2 text-lg text-white">
           <Clock className="h-5 w-5 text-white" />
-          Prayer Times for {location.split('/').pop() || 'Your Location'}
+          Prayer Times for {location}
         </CardTitle>
       </CardHeader>
       <CardContent>

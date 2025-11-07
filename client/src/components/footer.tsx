@@ -123,7 +123,7 @@ export default function Footer() {
 
         <div className="border-t border-slate-700 mt-8 pt-8 text-center text-sm text-slate-400">
           <p>
-            &copy; 2025 Hadith 360. All rights reserved. Developed BY ALI YASIR with precision and care for the Muslim community.
+            &copy; 2025 Hadith 360. All rights reserved. Developed by ALI YASIR Afridi with precision and care for the Muslim community.
           </p>
         </div>
       </div>
