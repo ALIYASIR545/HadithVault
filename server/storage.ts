@@ -56,7 +56,6 @@ export class MemStorage implements IStorage {
   private hadiths: Map<string, Hadith>;
   private bookmarks: Map<string, Bookmark>;
   private userPreferences: Map<string, UserPreferences>;
-  private loadedCollections: Set<string>; // Track which collections are loaded
 
   constructor() {
     this.users = new Map();
@@ -64,16 +63,15 @@ export class MemStorage implements IStorage {
     this.hadiths = new Map();
     this.bookmarks = new Map();
     this.userPreferences = new Map();
-    this.loadedCollections = new Set();
 
-    // Initialize with metadata only (not the actual hadiths)
+    // Initialize with data from JSON files
     this.initializeData();
   }
 
   private initializeData() {
-    console.log("Initializing hadith collections metadata...");
+    console.log("Loading hadith data from JSON files...");
 
-    // Define collections metadata (NO HADITHS LOADED YET - lazy loading)
+    // Define collections metadata
     const collections: HadithCollection[] = [
       {
         id: "bukhari",
@@ -129,16 +127,15 @@ export class MemStorage implements IStorage {
       this.hadithCollections.set(collection.id, collection);
     });
 
-    console.log(`Initialized ${this.hadithCollections.size} hadith collections (lazy loading enabled)`);
-  }
+    // Load hadiths from JSON files
+    this.loadHadithsFromFile("bukhari");
+    this.loadHadithsFromFile("muslim");
+    this.loadHadithsFromFile("tirmidhi");
+    this.loadHadithsFromFile("abudawud");
+    this.loadHadithsFromFile("ibnmajah");
+    this.loadHadithsFromFile("nasai");
 
-  // Ensure a collection is loaded before accessing its hadiths
-  private ensureCollectionLoaded(collectionId: string) {
-    if (!this.loadedCollections.has(collectionId)) {
-      console.log(`Lazy loading collection: ${collectionId}`);
-      this.loadHadithsFromFile(collectionId);
-      this.loadedCollections.add(collectionId);
-    }
+    console.log(`Loaded ${this.hadiths.size} hadiths from ${this.hadithCollections.size} collections`);
   }
 
   private loadHadithsFromFile(collectionId: string) {
@@ -263,11 +260,6 @@ export class MemStorage implements IStorage {
     limit?: number;
     offset?: number;
   }): Promise<Hadith[]> {
-    // Lazy load the requested collection if specified
-    if (params?.collectionId) {
-      this.ensureCollectionLoaded(params.collectionId);
-    }
-
     let hadiths = Array.from(this.hadiths.values());
 
     if (params?.collectionId) {
@@ -319,11 +311,6 @@ export class MemStorage implements IStorage {
   }
 
   async getHadith(id: string): Promise<Hadith | undefined> {
-    // Extract collection ID from hadith ID (format: collectionId-hadithId)
-    const collectionId = id.split('-')[0];
-    if (collectionId) {
-      this.ensureCollectionLoaded(collectionId);
-    }
     return this.hadiths.get(id);
   }
 
@@ -345,10 +332,6 @@ export class MemStorage implements IStorage {
   }
 
   async searchHadiths(query: string, collectionId?: string): Promise<Hadith[]> {
-    // Lazy load the collection if specified
-    if (collectionId) {
-      this.ensureCollectionLoaded(collectionId);
-    }
     return this.getHadiths({ search: query, collectionId });
   }
 
