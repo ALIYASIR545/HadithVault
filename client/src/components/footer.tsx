@@ -39,7 +39,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-slate-300">
               <li>
                 <a
-                  href="#"
+                  href="/collections/bukhari"
                   className="hover:text-islamic-teal transition-colors"
                   data-testid="footer-bukhari"
                 >
@@ -48,7 +48,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/collections/muslim"
                   className="hover:text-islamic-teal transition-colors"
                   data-testid="footer-muslim"
                 >
@@ -57,7 +57,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/collections/abudawud"
                   className="hover:text-islamic-teal transition-colors"
                   data-testid="footer-abudawud"
                 >
@@ -66,11 +66,29 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/collections/tirmidhi"
                   className="hover:text-islamic-teal transition-colors"
                   data-testid="footer-tirmidhi"
                 >
                   Jami` at-Tirmidhi
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/collections/ibnmajah"
+                  className="hover:text-islamic-teal transition-colors"
+                  data-testid="footer-ibnmajah"
+                >
+                  Sunan Ibn Majah
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/collections/nasai"
+                  className="hover:text-islamic-teal transition-colors"
+                  data-testid="footer-nasai"
+                >
+                  Sunan an-Nasa'i
                 </a>
               </li>
             </ul>
@@ -83,7 +101,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-slate-300">
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="hover:text-islamic-teal transition-colors"
                   data-testid="footer-about"
                 >
@@ -92,7 +110,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="hover:text-islamic-teal transition-colors"
                   data-testid="footer-help"
                 >
@@ -101,7 +119,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="hover:text-islamic-teal transition-colors"
                   data-testid="footer-contact"
                 >
@@ -110,7 +128,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="hover:text-islamic-teal transition-colors"
                   data-testid="footer-privacy"
                 >
