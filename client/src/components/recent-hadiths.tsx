@@ -29,15 +29,19 @@ interface RecentHadithEntry {
 export default function RecentHadiths() {
   const [, setLocation] = useLocation();
   const [recentHadithIds, setRecentHadithIds] = useState<string[]>([]);
-  const { data: hadiths, isLoading } = useQuery<Hadith[]>({
-    queryKey: ["/api/hadiths"],
-  });
+  const [recentHadiths, setRecentHadiths] = useState<Hadith[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Load recent hadith IDs from localStorage on mount and filter by 24 hours
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem(RECENT_HADITHS_KEY);
-      if (saved) {
+    const loadRecentHadiths = async () => {
+      try {
+        const saved = localStorage.getItem(RECENT_HADITHS_KEY);
+        if (!saved) {
+          setIsLoading(false);
+          return;
+        }
+
         const allRecent: RecentHadithEntry[] = JSON.parse(saved);
         const now = Date.now();
 
@@ -52,21 +56,41 @@ export default function RecentHadiths() {
         }
 
         // Extract just the IDs
-        setRecentHadithIds(last24Hours.map(entry => entry.id));
+        const ids = last24Hours.map(entry => entry.id);
+        setRecentHadithIds(ids);
+
+        // Fetch only the specific hadiths we need (first 3 for home page)
+        const hadithsToFetch = ids.slice(0, 3);
+        const fetchedHadiths: Hadith[] = [];
+
+        for (const id of hadithsToFetch) {
+          try {
+            const response = await fetch(`/api/hadiths/${id}`);
+            if (response.ok) {
+              const hadith = await response.json();
+              fetchedHadiths.push(hadith);
+            }
+          } catch (error) {
+            console.error(`Failed to fetch hadith ${id}:`, error);
+          }
+        }
+
+        setRecentHadiths(fetchedHadiths);
+      } catch (error) {
+        console.error('Failed to load recent hadiths:', error);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.error('Failed to load recent hadiths:', error);
-    }
+    };
+
+    loadRecentHadiths();
   }, []);
 
-  // Save recently viewed hadiths to localStorage
-  useEffect(() => {
-    // Don't auto-save the current hadiths - only track manually viewed ones
-    // This prevents the component from re-populating after clear
-  }, [hadiths]);
+  // No longer needed - hadiths are tracked in hadith-card component
 
   const handleClearRecent = () => {
     setRecentHadithIds([]);
+    setRecentHadiths([]);
     localStorage.removeItem(RECENT_HADITHS_KEY);
   };
 
@@ -157,13 +181,10 @@ export default function RecentHadiths() {
       </div>
 
       <div className="space-y-6">
-        {recentHadithIds.length > 0 ? (
-          hadiths
-            ?.filter(h => recentHadithIds.includes(h.id))
-            .slice(0, 3)
-            .map((hadith) => (
-              <HadithCard key={hadith.id} hadith={hadith} />
-            ))
+        {recentHadiths.length > 0 ? (
+          recentHadiths.map((hadith) => (
+            <HadithCard key={hadith.id} hadith={hadith} />
+          ))
         ) : (
           <p className="text-center text-slate-500 py-8">No recent hadiths yet. Browse collections to get started!</p>
         )}
