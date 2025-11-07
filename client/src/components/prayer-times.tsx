@@ -36,20 +36,35 @@ export default function PrayerTimes() {
             const { latitude, longitude } = position.coords;
 
             try {
-              // First, get city name using reverse geocoding
+              // First, get city name using reverse geocoding with user agent
               const geoResponse = await fetch(
-                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`,
+                {
+                  headers: {
+                    'User-Agent': 'HadithVault/1.0'
+                  }
+                }
               );
-              const geoData = await geoResponse.json();
 
-              // Extract city name from address
-              const cityName = geoData.address?.city ||
-                               geoData.address?.town ||
-                               geoData.address?.village ||
-                               geoData.address?.county ||
-                               'Your Location';
+              if (geoResponse.ok) {
+                const geoData = await geoResponse.json();
 
-              setLocation(cityName);
+                // Extract city name from address - try multiple fields
+                const cityName = geoData.address?.city ||
+                                 geoData.address?.town ||
+                                 geoData.address?.village ||
+                                 geoData.address?.municipality ||
+                                 geoData.address?.county ||
+                                 geoData.address?.state_district ||
+                                 geoData.address?.state ||
+                                 'Your Location';
+
+                setLocation(cityName);
+                console.log('Detected location:', cityName, 'Full address:', geoData.address);
+              } else {
+                console.warn('Geocoding failed, using fallback');
+                setLocation('Your Location');
+              }
 
               // Fetch prayer times from Aladhan API
               const today = new Date();
