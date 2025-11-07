@@ -19,6 +19,12 @@ import {
 
 const RECENT_HADITHS_KEY = 'hadith-recent-hadiths';
 const MAX_RECENT_HADITHS = 10;
+const TWENTY_FOUR_HOURS_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+interface RecentHadithEntry {
+  id: string;
+  timestamp: number;
+}
 
 export default function RecentHadiths() {
   const [, setLocation] = useLocation();
@@ -27,12 +33,26 @@ export default function RecentHadiths() {
     queryKey: ["/api/hadiths"],
   });
 
-  // Load recent hadith IDs from localStorage on mount
+  // Load recent hadith IDs from localStorage on mount and filter by 24 hours
   useEffect(() => {
     try {
       const saved = localStorage.getItem(RECENT_HADITHS_KEY);
       if (saved) {
-        setRecentHadithIds(JSON.parse(saved));
+        const allRecent: RecentHadithEntry[] = JSON.parse(saved);
+        const now = Date.now();
+
+        // Filter to only include hadiths viewed in last 24 hours
+        const last24Hours = allRecent.filter(
+          entry => (now - entry.timestamp) < TWENTY_FOUR_HOURS_MS
+        );
+
+        // Update localStorage to remove old entries
+        if (last24Hours.length !== allRecent.length) {
+          localStorage.setItem(RECENT_HADITHS_KEY, JSON.stringify(last24Hours));
+        }
+
+        // Extract just the IDs
+        setRecentHadithIds(last24Hours.map(entry => entry.id));
       }
     } catch (error) {
       console.error('Failed to load recent hadiths:', error);
@@ -51,8 +71,8 @@ export default function RecentHadiths() {
   };
 
   const handleViewAll = () => {
-    // Navigate to Bukhari collection by default, or create a dedicated "all" view
-    setLocation('/collections/bukhari');
+    // Navigate to dedicated recent hadiths page
+    setLocation('/recent');
   };
 
   if (isLoading) {

@@ -8,6 +8,7 @@ import { FontSizeProvider } from "@/contexts/FontSizeContext";
 import { ReadingProgressProvider } from "@/contexts/ReadingProgressContext";
 import Home from "@/pages/home";
 import Collection from "@/pages/collection";
+import Recent from "@/pages/recent";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -15,6 +16,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/collections/:id" component={Collection} />
+      <Route path="/recent" component={Recent} />
       <Route component={NotFound} />
     </Switch>
   );

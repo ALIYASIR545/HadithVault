@@ -21,11 +21,32 @@ export default function HadithCard({ hadith }: HadithCardProps) {
   const hadithIsRead = isRead(hadith.id);
   const { isPlaying, isPaused, toggle, stop } = useTextToSpeech({ lang: 'ar-SA', rate: 0.85 });
 
-  // Auto-mark as read after viewing for 3 seconds
+  // Auto-mark as read after viewing for 3 seconds AND add to recent hadiths
   useEffect(() => {
     if (!hadithIsRead) {
       const timer = setTimeout(() => {
         markAsRead(hadith.id);
+
+        // Add to recent hadiths with timestamp
+        try {
+          const RECENT_HADITHS_KEY = 'hadith-recent-hadiths';
+          const saved = localStorage.getItem(RECENT_HADITHS_KEY);
+          const recentHadiths = saved ? JSON.parse(saved) : [];
+
+          // Add new hadith with timestamp
+          const newEntry = {
+            id: hadith.id,
+            timestamp: Date.now()
+          };
+
+          // Remove if already exists and add to beginning
+          const filtered = recentHadiths.filter((h: any) => h.id !== hadith.id);
+          const updated = [newEntry, ...filtered].slice(0, 10); // Keep max 10
+
+          localStorage.setItem(RECENT_HADITHS_KEY, JSON.stringify(updated));
+        } catch (error) {
+          console.error('Failed to save recent hadith:', error);
+        }
       }, 3000);
       return () => clearTimeout(timer);
     }
